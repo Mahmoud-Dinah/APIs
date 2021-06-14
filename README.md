@@ -1,3 +1,36 @@
+# city-Explorer
+
+**Author**: Mahmoud Al-Dinah
+**Version**: 1.1.1
+
+## Overview
+An application to explore a city maps according to selected city
+
+## Getting Started
+Navigate to this link to start usuing this App:
+https://city-explorer12.netlify.app/ 
+
+## Architecture
+JS,ReactJs,Bootstrap-React,axios
+
+## Change Log
+
+013-06-2021 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
+
+## Credit and Collaborations
+Axios: https://www.npmjs.com/package/axios
+
+
+
+
+
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
