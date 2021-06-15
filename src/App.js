@@ -83,6 +83,8 @@ export class App extends Component {
                 <p>
                 {value.weather.description}
                 <br></br>
+                {value.valid_date}
+                <br></br>
          
                 </p>
                 )
