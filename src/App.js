@@ -11,6 +11,8 @@ export class App extends Component {
     this.state = {
       cityName: '',
       cityData: {},
+      lat:'',
+      lon:'',
       weatherData: [],
       display: false,
 
@@ -27,21 +29,25 @@ export class App extends Component {
   getCityName = async (e) => {
     e.preventDefault();
 
-    const axiosApi = await axios.get(`https://us1.locationiq.com/v1/search.php?key=pk.63f6d30ca32ebd9db1c2265991c6c770&city=${this.state.cityName}&format=json`);
+    await axios.get(`https://us1.locationiq.com/v1/search.php?key=pk.63f6d30ca32ebd9db1c2265991c6c770&city=${this.state.cityName}&format=json`).then(locationResponse => {
+      this.setState({
+        cityData: locationResponse.data[0],
+        lat: locationResponse.data[0].lat,
+        lon: locationResponse.data[0].lon,
+      });
 
-    const weatherApi = await axios.get(`${process.env.REACT_APP_URL}`);
-
-
-    console.log(axiosApi);
-
+      axios.get(`${process.env.REACT_APP_URL}/weather?lat=${this.state.lat}&lon=${this.state.lon}`).then(weatherResponse => {
+          
     this.setState({
-      cityData: axiosApi.data[0],
-      weatherData: weatherApi.data.data,
+      
+      weatherData: weatherResponse.data,
       display: true,
     })
 
-  }
 
+    });
+  });
+  }
   render() {
     console.log(this.state);
     return (
@@ -78,12 +84,12 @@ export class App extends Component {
             <img style={{ width: '50%'}} src={`https://maps.locationiq.com/v3/staticmap?key=pk.d36871f015649f915282f374cff76628&q&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=10`} alt='' />
 
             {
-              this.state.weatherData.map(value =>{
+              this.state.weatherData.map(weatherObj =>{
                 return(
                 <p>
-                {value.weather.description}
+                {weatherObj.description}
                 <br></br>
-                {value.valid_date}
+                {weatherObj.date}
                 <br></br>
          
                 </p>
