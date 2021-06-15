@@ -36,7 +36,7 @@ export class App extends Component {
         lon: locationResponse.data[0].lon,
       });
 
-      axios.get(`${process.env.REACT_APP_URL}?lat=${this.state.lat}&lon=${this.state.lon}`).then(weatherResponse => {
+      axios.get(`${process.env.REACT_APP_URL}/weather?lat=${this.state.lat}&lon=${this.state.lon}`).then(weatherResponse => {
           
     this.setState({
       
